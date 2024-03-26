@@ -1,0 +1,18 @@
+.container-Register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subcontainer-Register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 5%;
+    border-radius: 10px;
+}
+.fieldset-Register{
+    margin-top: 6%;
+    margin-bottom: 6%;
+}
