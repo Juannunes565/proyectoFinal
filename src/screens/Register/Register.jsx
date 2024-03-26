@@ -1,54 +1,68 @@
 import "./Register.css"
+import firebase from "../../firebaseConfig"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () =>{
 
-    const handleRegister = () =>{
-        const email1 = document.getElementById("email-R").value
-        const password1 = document.getElementById("password1-R").value
-        const password2 = document.getElementById("password2-R").value
-        const name = document.getElementById("name-R").value
-        const lastName = document.getElementById("LastName-R").value
-        const id = document.getElementById("id-R").value
+    
+    const handleRegister = async(e) => {
+        e.preventDefault()
+        
+        try{
+            const auth = getAuth(firebase)
 
-        if (password1 == password2){
-                
-        }else{
-            alert("Las contraseñas no coinciden!!!!")
+            const data = {
+                email: e.target.email.value,
+                password: e.target.password.value,
+                confirmPassword: e.target.confirmPassword.value,
+                name: e.target.name.value,
+                lastName: e.target.lastName.value,
+                id: e.target.id.value
+            }
+
+            if(data.password != data.confirmPassword){
+                alert("Contraseña no valida")
+            }
+            else{
+                await createUserWithEmailAndPassword(auth, data.email, data.password)
+                alert("Perfil creado con exito!")                
+            }
+        }
+        catch(e){
+            console.log(e)
         }
     }
+    
 
-    const numeric = () =>{
-        alert("!!!!")
-    }
     return (
         <div className="container-Register">            
-            <form className="subcontainer-Register">
+            <form onSubmit={handleRegister} className="subcontainer-Register">
                 <h2>Registrarse</h2>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese email</legend>
-                    <input type="text" id="email-R"></input>
+                    <input type="text" id="email"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese contraseña</legend>
-                    <input type="text" id="password1-R"></input>
+                    <input type="text" id="password"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Confirme contraseña</legend>
-                    <input type="text" id="password2-R"></input>
+                    <input type="text" id="confirmPassword"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese su nombre</legend>
-                    <input type="text" id="name-R"></input>
+                    <input type="text" id="name"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese su apellido</legend>
-                    <input type="text" id="LastName-R"></input>
+                    <input type="text" id="lastName"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese su cedula</legend>
-                    <input type="text" id="id-R" onKeyDown = {numeric}></input>
+                    <input type="text" id="id"></input>
                 </fieldset>
-                <input type="submit" value="Register" onSubmit ={handleRegister}></input>
+                <input type="submit" value="Register"></input>
             </form>
         </div>
     )

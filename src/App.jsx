@@ -5,8 +5,7 @@ import Register from "./screens/Register/Register"
 const App = () => {
 
     return (
-        <div>            
-            <Register/>
+        <div>                        
             <Login/>
         </div>
     )

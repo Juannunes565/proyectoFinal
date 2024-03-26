@@ -1,12 +1,24 @@
 import "./Login.css"
-import firebase from "../../"
+import firebase from "../../firebaseConfig"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+const auth = getAuth(firebase)
 
 const Login = () => {
     
     const handleLogin = async(e) => {
+        e.preventDefault()
+
         const email = e.target.email.value
-        const password = e.target.password.value                
+        const password = e.target.password.value   
+           
+        
+       
+            await signInWithEmailAndPassword(auth, email, password)
+            alert("Sesion iniciada con exito!")
+        
+        
+
     }
 
     return (        
