@@ -5,7 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 const auth = getAuth(firebase)
 
 const Login = () => {
-    
+
     const handleLogin = async(e) => {
         e.preventDefault()
 
@@ -14,11 +14,9 @@ const Login = () => {
            
         
        
-            await signInWithEmailAndPassword(auth, email, password)
-            alert("Sesion iniciada con exito!")
-        
-        
-
+        await signInWithEmailAndPassword(auth, email, password)
+        alert("Sesion iniciada con exito!")
+    
     }
 
     return (        

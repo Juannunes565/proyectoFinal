@@ -1,42 +1,54 @@
 import "./Register.css"
 import firebase from "../../firebaseConfig"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth} from "firebase/auth";
 
 const Register = () =>{
 
-    
-    const handleRegister = async(e) => {
-        e.preventDefault()
+    const handleRegister = async(event)  =>{
+        event.preventDefault()
+        const email1 = document.getElementById("email-R").value
+        const password1 = document.getElementById("password1-R").value
+        const password2 = document.getElementById("password2-R").value
+        const name = document.getElementById("name-R").value
+        const lastName = document.getElementById("LastName-R").value
+        const id = document.getElementById("id-R").value
         
-        try{
-            const auth = getAuth(firebase)
 
-            const data = {
-                email: e.target.email.value,
-                password: e.target.password.value,
-                confirmPassword: e.target.confirmPassword.value,
-                name: e.target.name.value,
-                lastName: e.target.lastName.value,
-                id: e.target.id.value
+        if (email1=="" || password1 ==""|| password2 =="" || name =="" || lastName == "" || id ==""){
+                alert("No puede dejar campos vacios!!!")
+        }else{
+            try {
+                if(password1==password2){
+                    const auth = getAuth()
+                    await createUserWithEmailAndPassword(auth,email1,password1)
+                    alert('usuario creado con exito!!!')
+                }else{
+                    alert("Las contraseñas no coinciden!!!")
+                }            
+            } catch (error) {
+                alert(error.message)
             }
-
-            if(data.password != data.confirmPassword){
-                alert("Contraseña no valida")
-            }
-            else{
-                await createUserWithEmailAndPassword(auth, data.email, data.password)
-                alert("Perfil creado con exito!")                
-            }
-        }
-        catch(e){
-            console.log(e)
+            
         }
     }
     
 
+    const numeric = (event) =>{
+        const teclaPresionada = event.key;
+        if(teclaPresionada=== "Backspace"){
+            return
+        }
+        if (teclaPresionada === " ") {
+            event.preventDefault(); 
+            return;
+        }
+        if (isNaN(teclaPresionada)) {
+            event.preventDefault(); 
+        }
+    }
     return (
         <div className="container-Register">            
-            <form onSubmit={handleRegister} className="subcontainer-Register">
+            <form className="subcontainer-Register" onSubmit ={handleRegister}>
                 <h2>Registrarse</h2>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese email</legend>
@@ -44,11 +56,11 @@ const Register = () =>{
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese contraseña</legend>
-                    <input type="text" id="password"></input>
+                    <input type="password" id="password1-R"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Confirme contraseña</legend>
-                    <input type="text" id="confirmPassword"></input>
+                    <input type="password" id="password2-R"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese su nombre</legend>
