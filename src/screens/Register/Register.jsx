@@ -1,28 +1,53 @@
 import "./Register.css"
+import firebase from "../../firebaseConfig"
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Register = () =>{
 
-    const handleRegister = () =>{
+    const handleRegister = async(event)  =>{
+        event.preventDefault()
         const email1 = document.getElementById("email-R").value
         const password1 = document.getElementById("password1-R").value
         const password2 = document.getElementById("password2-R").value
         const name = document.getElementById("name-R").value
         const lastName = document.getElementById("LastName-R").value
         const id = document.getElementById("id-R").value
+        
 
-        if (password1 == password2){
-                
+        if (email1=="" || password1 ==""|| password2 =="" || name =="" || lastName == "" || id ==""){
+                alert("No puede dejar campos vacios!!!")
         }else{
-            alert("Las contraseñas no coinciden!!!!")
+            try {
+                if(password1==password2){
+                    const auth = getAuth()
+                    await createUserWithEmailAndPassword(auth,email1,password1)
+                    alert('usuario creado con exito!!!')
+                }else{
+                    alert("Las contraseñas no coinciden!!!")
+                }            
+            } catch (error) {
+                alert(error.message)
+            }
+            
         }
     }
 
-    const numeric = () =>{
-        alert("!!!!")
+    const numeric = (event) =>{
+        const teclaPresionada = event.key;
+        if(teclaPresionada=== "Backspace"){
+            return
+        }
+        if (teclaPresionada === " ") {
+            event.preventDefault(); 
+            return;
+        }
+        if (isNaN(teclaPresionada)) {
+            event.preventDefault(); 
+        }
     }
     return (
         <div className="container-Register">            
-            <form className="subcontainer-Register">
+            <form className="subcontainer-Register" onSubmit ={handleRegister}>
                 <h2>Registrarse</h2>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese email</legend>
@@ -30,11 +55,11 @@ const Register = () =>{
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese contraseña</legend>
-                    <input type="text" id="password1-R"></input>
+                    <input type="password" id="password1-R"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Confirme contraseña</legend>
-                    <input type="text" id="password2-R"></input>
+                    <input type="password" id="password2-R"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese su nombre</legend>
@@ -48,7 +73,7 @@ const Register = () =>{
                     <legend>Ingrese su cedula</legend>
                     <input type="text" id="id-R" onKeyDown = {numeric}></input>
                 </fieldset>
-                <input type="submit" value="Register" onSubmit ={handleRegister}></input>
+                <input type="submit" value="Register"></input>
             </form>
         </div>
     )

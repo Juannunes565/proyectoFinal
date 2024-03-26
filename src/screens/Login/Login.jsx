@@ -1,12 +1,11 @@
 import "./Login.css"
-import firebase from "../../"
+
 
 
 const Login = () => {
     
-    const handleLogin = async(e) => {
-        const email = e.target.email.value
-        const password = e.target.password.value                
+    const handleLogin = async() => {
+                     
     }
 
     return (        
