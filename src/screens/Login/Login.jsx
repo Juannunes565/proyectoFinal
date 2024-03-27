@@ -18,7 +18,7 @@ const Login = () => {
        try {
         await signInWithEmailAndPassword(auth, email, password)
         alert("Sesion iniciada con exito!")
-        navigate("/register")
+        navigate("/main")
         
        } catch (error) {
         alert("Correo o contraseña invalidos!!!")
