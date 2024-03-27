@@ -1,8 +1,20 @@
 import "./Register.css"
-import firebase from "../../firebaseConfig"
+import firebase from "../../firebaseConfig";
+
+
 import { createUserWithEmailAndPassword, getAuth} from "firebase/auth";
+import { Link, useNavigate } from 'react-router-dom';
+import {getFirestore, collection, addDoc} from "firebase/firestore";
+
+
+const db = getFirestore(firebase);
+const collectionRef = collection(db, "Usuario");
+
 
 const Register = () =>{
+
+    const navigate = useNavigate()
+    
 
     const handleRegister = async(event)  =>{
         event.preventDefault()
@@ -12,6 +24,14 @@ const Register = () =>{
         const name = document.getElementById("name-R").value
         const lastName = document.getElementById("LastName-R").value
         const id = document.getElementById("id-R").value
+
+        const data = {
+            Email : email1,
+            Name : name,
+            LastN : lastName,
+            Id : id
+
+        }
         
 
         if (email1=="" || password1 ==""|| password2 =="" || name =="" || lastName == "" || id ==""){
@@ -21,7 +41,12 @@ const Register = () =>{
                 if(password1==password2){
                     const auth = getAuth()
                     await createUserWithEmailAndPassword(auth,email1,password1)
-                    alert('usuario creado con exito!!!')
+                    await addDoc(collectionRef, data);
+                    alert('usuario creado con exito!!!');
+                    navigate("/login")
+                    
+                    
+                    
                 }else{
                     alert("Las contraseñas no coinciden!!!")
                 }            
@@ -46,13 +71,15 @@ const Register = () =>{
             event.preventDefault(); 
         }
     }
+
+    
     return (
         <div className="container-Register">            
             <form className="subcontainer-Register" onSubmit ={handleRegister}>
                 <h2>Registrarse</h2>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese email</legend>
-                    <input type="text" id="email"></input>
+                    <input type="text" id="email-R"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese contraseña</legend>
@@ -64,17 +91,19 @@ const Register = () =>{
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese su nombre</legend>
-                    <input type="text" id="name"></input>
+                    <input type="text" id="name-R"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese su apellido</legend>
-                    <input type="text" id="lastName"></input>
+                    <input type="text" id="LastName-R"></input>
                 </fieldset>
                 <fieldset className="fieldset-Register">
                     <legend>Ingrese su cedula</legend>
-                    <input type="text" id="id"></input>
+                    <input type="text" id="id-R" onKeyDown={numeric}></input>
                 </fieldset>
-                <input type="submit" value="Register"></input>
+                <input type="submit" value="Register" ></input>
+                <p>Ya tienes cuenta?</p>
+                <Link to="/">Iniciar Sesion</Link>
             </form>
         </div>
     )

@@ -1,10 +1,12 @@
 import "./Login.css"
 import firebase from "../../firebaseConfig"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate} from 'react-router-dom';
 
 const auth = getAuth(firebase)
 
 const Login = () => {
+    const navigate = useNavigate();
 
     const handleLogin = async(e) => {
         e.preventDefault()
@@ -13,9 +15,17 @@ const Login = () => {
         const password = e.target.password.value   
            
         
-       
+       try {
         await signInWithEmailAndPassword(auth, email, password)
         alert("Sesion iniciada con exito!")
+        navigate("/register")
+        
+       } catch (error) {
+        alert("Correo o contraseña invalidos!!!")
+        console.log(error)
+        
+       }
+        
     
     }
 
@@ -31,8 +41,13 @@ const Login = () => {
                     <legend>Ingrese contraseña</legend>
                     <input type="text" id="password"></input>
                 </fieldset>
-                <input type="submit"></input>
+                
+                <input type="submit" value="Iniciar Sesión"></input>
+                
+                <p>No tienes cuenta?</p>
+                <Link to="/register">Crear Usuario</Link>
             </form>
+            
         </div>        
     )
 
