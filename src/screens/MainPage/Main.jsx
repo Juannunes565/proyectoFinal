@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { getAuth} from "firebase/auth";
 import firebase from "../../firebaseConfig"
 import "./Main.css"
@@ -27,12 +27,12 @@ const Main = () => {
 
     return(
         <div >
+            <h2 id="text">UNIMET</h2>
             <div className="mainBar">
                 <button onClick={perfil} className="button">Perfil de Usuario</button>
                 <button onClick={handleLogout} className="button">Cerrar Sesion</button> 
                 <button className="button">Agrupaciones</button> 
             </div>
-            <h2 id="text">UNIMET</h2>
         </div>
     )
 }
