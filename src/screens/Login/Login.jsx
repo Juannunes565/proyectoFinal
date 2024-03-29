@@ -30,25 +30,32 @@ const Login = () => {
     }
 
     return (        
-        <div className="container-Login">
-            <form onSubmit={handleLogin} className="subcontainer-Login">
-                <h2>Iniciar sesion</h2>
-                <fieldset className="fieldset-Login">
-                    <legend>Ingrese email</legend>
-                    <input type="text" id="email"></input>
-                </fieldset>
-                <fieldset className="fieldset-Login">
-                    <legend>Ingrese contraseña</legend>
-                    <input type="text" id="password"></input>
-                </fieldset>
-                
-                <input type="submit" value="Iniciar Sesión"></input>
-                
-                <p>No tienes cuenta?</p>
-                <Link to="/register">Crear Usuario</Link>
-            </form>
-            
-        </div>        
+<div className="container-Login">
+    <form onSubmit={handleLogin} className="subcontainer-Login">
+        <h2>Iniciar sesión</h2>
+        <fieldset className="fieldset-Login">
+            <legend>Ingrese email</legend>
+            <input type="text" id="email"></input>
+        </fieldset>
+        <fieldset className="fieldset-Login">
+            <legend>Ingrese contraseña</legend>
+            <input type="text" id="password"></input>
+        </fieldset>
+        
+        <input type="submit" value="Iniciar Sesión"></input>
+        
+        <p>No tienes cuenta?</p>
+        <Link to="/register">Crear Usuario</Link>
+    </form>
+    <footer>
+        <div className = "footer-content">
+      <img src="/Logo-footer.png"/>
+      <p>Copyright © 2024 - Universidad Metropolitana</p>
+      <p>Todos los derechos reservados </p>
+      </div>
+  </footer>
+</div>  
+             
     )
 
 }
