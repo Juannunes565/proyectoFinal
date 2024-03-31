@@ -11,6 +11,8 @@
     border: 1px solid black;
     padding: 5%;
     border-radius: 10px;
+    background-color: orange;
+    margin: 0%;
 }
 .fieldset-Register{
     margin-top: 6%;

@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import { getAuth} from "firebase/auth";
 import firebase from "../../firebaseConfig"
 import imagenes from "../../assets/imagenes";
-import "./Grupos.css"
+import "./grupos.css"
 import Agrupaciones from "../../assets/agrupaciones.json"
 
 
