@@ -96,3 +96,8 @@ body{
     color: gray;
     padding: 1%;
 }
+
+.logo{
+    margin-top: 5px;
+    border-radius: 15px;
+}

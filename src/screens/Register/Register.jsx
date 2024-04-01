@@ -74,7 +74,10 @@ const Register = () =>{
 
     
     return (
-        <div className="container-Register">            
+        <div>
+        
+        <div className="container-Register">   
+                  
             <form className="subcontainer-Register" onSubmit ={handleRegister}>
                 <h2>Registrarse</h2>
                 <fieldset className="fieldset-Register">
@@ -105,6 +108,7 @@ const Register = () =>{
                 <p>Ya tienes cuenta?</p>
                 <Link to="/">Iniciar Sesion</Link>
             </form>
+        </div>
         </div>
     )
 
