@@ -43,7 +43,7 @@ const Register = () =>{
                     await createUserWithEmailAndPassword(auth,email1,password1)
                     await addDoc(collectionRef, data);
                     alert('usuario creado con exito!!!');
-                    navigate("/login")
+                    navigate("/")
                     
                     
                     
